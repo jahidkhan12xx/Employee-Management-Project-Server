@@ -1,0 +1,36 @@
+[
+    {
+      "email": "gojo@gmail.com",
+      "payment_history": [
+        { "month": "01/23", "amount": 1200 },
+        { "month": "02/23", "amount": 1200 },
+        { "month": "03/23", "amount": 1200 }
+      ]
+    },
+    {
+        "email": "goku@gmail.com",
+        "payment_history": [
+          { "month": "01/23", "amount": 1200 },
+          { "month": "02/23", "amount": 1200 },
+          { "month": "03/23", "amount": 1200 }
+        ]
+      },
+      {
+        "email": "eren@gmail.com",
+        "payment_history": [
+          { "month": "01/23", "amount": 1200 },
+          { "month": "02/23", "amount": 1200 },
+          { "month": "03/23", "amount": 1200 }
+        ]
+      },
+      {
+        "email": "pain@gmail.com",
+        "payment_history": [
+          { "month": "01/23", "amount": 1200 },
+          { "month": "02/23", "amount": 1200 },
+          { "month": "03/23", "amount": 1200 }
+        ]
+      }
+    
+  ]
+  

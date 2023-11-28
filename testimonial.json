@@ -1,0 +1,24 @@
+[
+    {
+      "id": 1,
+      "name": "John Doe",
+      "position": "CEO, Company A",
+      "testimonial": "Working with this team has been a game-changer for our business. Their attention to detail and innovative solutions have significantly improved our online presence. I highly recommend their services.",
+      "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "position": "CTO, Company B",
+      "testimonial": "The expertise and professionalism demonstrated by this team are unparalleled. They not only met our expectations but exceeded them. I'm grateful for the positive impact they've had on our projects.",
+      "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+      "id": 3,
+      "name": "Alice Johnson",
+      "position": "Designer, Company C",
+      "testimonial": "I've had the pleasure of collaborating with this team on several design projects. Their creativity and ability to bring ideas to life are truly impressive. I look forward to working together on future endeavors.",
+      "avatar": "https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    }
+  ]
+  

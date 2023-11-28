@@ -1,0 +1,63 @@
+[
+    {
+      "id": 1,
+      "title": "Custom Employee Portals",
+      "description": "Tailored web portals for employees to access HR services, leave requests, and company information.",
+      "icon": "fa-desktop"
+    },
+    {
+      "id": 2,
+      "title": "Mobile HR Apps",
+      "description": "Mobile applications for HR management, allowing employees to manage tasks on the go.",
+      "icon": "fa-mobile-alt"
+    },
+    {
+      "id": 3,
+      "title": "HR Software Integration",
+      "description": "Integration of HR modules into existing software systems for seamless employee data management.",
+      "icon": "fa-cogs"
+    },
+    {
+      "id": 4,
+      "title": "Employee Productivity Tools",
+      "description": "Development of productivity tools to enhance employee efficiency and task management.",
+      "icon": "fa-tools"
+    },
+    {
+      "id": 5,
+      "title": "Customized Reporting Solutions",
+      "description": "Creation of personalized reporting tools to analyze HR metrics and employee performance.",
+      "icon": "fa-chart-pie"
+    },
+    {
+      "id": 6,
+      "title": "HR Automation",
+      "description": "Automation of routine HR processes to streamline workflows and reduce manual tasks.",
+      "icon": "fa-robot"
+    },
+    {
+      "id": 7,
+      "title": "Employee Data Security",
+      "description": "Implementation of robust security measures to protect sensitive employee information.",
+      "icon": "fa-lock"
+    },
+    {
+      "id": 8,
+      "title": "Employee Training Platforms",
+      "description": "Development of online training platforms to facilitate employee learning and skill development.",
+      "icon": "fa-graduation-cap"
+    },
+    {
+      "id": 9,
+      "title": "Employee Feedback Apps",
+      "description": "Creation of feedback applications for employees to share insights and suggestions.",
+      "icon": "fa-comment"
+    },
+    {
+      "id": 10,
+      "title": "Performance Analytics Software",
+      "description": "Software solutions for analyzing employee performance data and generating insights.",
+      "icon": "fa-chart-bar"
+    }
+  ]
+  

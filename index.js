@@ -3,6 +3,7 @@ require('dotenv').config()
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const cors = require('cors')
 const { v4: uuidv4 } = require('uuid');
+const jwt = require('jsonwebtoken');
 const app = express()
 const port = process.env.PORT || 5000;
 
@@ -34,6 +35,53 @@ async function run() {
     const paymentCollection = client.db("PB").collection("Payment");
     const workSheetCollection = client.db("PB").collection("WorkSheet");
 
+    // jwt related api
+
+
+    
+     app.post("/api/v1/jwt", async (req, res) => {
+      const user = req.body;
+      console.log(user);
+      const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
+      res.send({ token });
+    })
+
+    const verifyToken = (req, res, next) => {
+      console.log("token verifieying");
+     
+      if (!req.headers.authorization) {
+        return res.status(401).send({ message: 'unauthorized access' });
+      }
+      const token = req.headers.authorization.split(' ')[1];
+      jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+        if (err) {
+          return res.status(401).send({ message: 'unauthorized access' })
+        }
+        req.decoded = decoded;
+        next();
+      })
+    }
+    const verifyAdmin = async (req, res, next) => {
+      const email = req.decoded.email;
+      const query = { email: email };
+      const user = await userCollection.findOne(query);
+      const isAdmin = user?.role === 'admin';
+      if (!isAdmin) {
+        return res.status(403).send({ message: 'forbidden access' });
+      }
+      next();
+    }
+    const verifyHR = async (req, res, next) => {
+      const email = req.decoded.email;
+      const query = { email: email };
+      const user = await userCollection.findOne(query);
+      const isHR = user?.role === 'hr';
+      if (!isHR) {
+        return res.status(403).send({ message: 'forbidden access' });
+      }
+      next();
+    }
+
     // service related api's
     app.get("/api/v1/services",async(req,res)=>{
         const result = await servicesCollection.find().toArray();
@@ -49,7 +97,8 @@ async function run() {
 
     // user related api's
 
-    app.get("/api/v1/users", async(req,res)=>{
+    app.get("/api/v1/users",verifyToken, async(req,res)=>{
+      console.log(req.headers);
       const result = await userCollection.find().toArray();
       res.send(result);
     })
@@ -61,7 +110,7 @@ async function run() {
       res.send(result)
     })
 
-    app.patch("/api/v1/users/:id", async(req,res)=>{
+    app.patch("/api/v1/users/:id",verifyToken,verifyHR, async(req,res)=>{
       const id = req.params.id;
       const data = req.body;
      
@@ -79,7 +128,7 @@ async function run() {
       res.send(result);
     })
 
-    app.get("/api/v1/users/employee" , async(req,res)=>{
+    app.get("/api/v1/users/employee",verifyToken, async(req,res)=>{
       const query = { role : "employee"};
       const result = await userCollection.find(query).toArray();
       res.send(result)
@@ -118,13 +167,19 @@ async function run() {
 
     // payment related api's
 
+    app.post("/api/v1/payment",async(req,res)=>{
+      const user = req.body;
+      const result = await paymentCollection.insertOne(user);
+      res.send(result)
+    })
 
-    app.get("/api/v1/payment", async(req,res)=>{
+
+    app.get("/api/v1/payment",verifyToken,verifyHR, async(req,res)=>{
       const result = await paymentCollection.find().toArray();
       res.send(result)
     })
 
-    app.get("/api/v1/userPayment/:id", async(req,res)=>{
+    app.get("/api/v1/userPayment/:id",verifyToken,verifyHR, async(req,res)=>{
       const email = req.params.id;
       const query ={ email : email};
       console.log(query);
@@ -132,7 +187,7 @@ async function run() {
       
       res.send(result);
     })
-    app.get("/api/v1/userPay/:id", async (req, res) => {
+    app.get("/api/v1/userPay/:id",verifyToken,verifyHR, async (req, res) => {
       const email = req.params.id;
       const query = { email: email };
     
@@ -155,7 +210,7 @@ async function run() {
 
     
 
-    app.patch("/api/v1/payment/:email", async(req,res)=>{
+    app.patch("/api/v1/payment/:email",verifyToken,verifyHR, async(req,res)=>{
       const email = req.params.email;
       const newMonth = req.body.month;
       const newAmount = req.body.amount;
@@ -210,7 +265,7 @@ async function run() {
       res.send(result)
     })
 
-    app.get("/api/v1/workSheet" ,async(req,res)=>{
+    app.get("/api/v1/workSheet",async(req,res)=>{
       const result = await workSheetCollection.find().toArray();
       res.send(result);
     })
@@ -253,7 +308,7 @@ async function run() {
 
     // Update user Roles
 
-    app.patch("/api/v1/updateRole/:email", async(req,res)=>{
+    app.patch("/api/v1/updateRole/:email",verifyToken,verifyAdmin, async(req,res)=>{
       const email = req.params.email;
       const filter = { email: email };
       console.log(email);
@@ -270,7 +325,7 @@ async function run() {
       res.send(result);
 
     })
-    app.patch("/api/v1/fireEmployee/:email", async(req,res)=>{
+    app.patch("/api/v1/fireEmployee/:email",verifyToken,verifyAdmin, async(req,res)=>{
       const email = req.params.email;
       const filter = { email: email };
       console.log(email);

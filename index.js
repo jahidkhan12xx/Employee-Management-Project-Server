@@ -261,7 +261,7 @@ async function run() {
     app.post("/api/v1/workSheet", async(req,res)=>{
       const data = req.body;
       const result = await workSheetCollection.insertOne(data);
-      console.log(result);
+      
       res.send(result)
     })
 
@@ -273,7 +273,7 @@ async function run() {
     app.get("/api/v1/progress",verifyToken,verifyHR, async (req, res) => {
       const name = req.query.name;
       const month = req.query.month;
-      console.log(name,month);
+     
     
       let query = {};
     

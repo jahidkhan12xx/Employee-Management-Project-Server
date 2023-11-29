@@ -182,7 +182,7 @@ async function run() {
     app.get("/api/v1/userPayment/:id", async(req,res)=>{
       const email = req.params.id;
       const query ={ email : email};
-      console.log(query);
+      
       const result = await paymentCollection.findOne(query);
       
       res.send(result);
@@ -218,7 +218,7 @@ async function run() {
       const transactionId = `TXN_${timestamp}`;
 
       
-      console.log("email", email,newAmount,newMonth);
+      
       const filter = { email: email };
       const existingUser = await paymentCollection.findOne(filter);
       if (existingUser) {
@@ -311,7 +311,7 @@ async function run() {
     app.patch("/api/v1/updateRole/:email",verifyToken,verifyAdmin, async(req,res)=>{
       const email = req.params.email;
       const filter = { email: email };
-      console.log(email);
+      
       const updatedUSer = {
         $set: {
           role: "hr",
